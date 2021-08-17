@@ -1,25 +1,22 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const db = require("./models");
 
-const app = express();
-
-var corsOptions = {
+const corsOptions = {
   origin: "http://localhost:3001"
 };
 
+const app = express();
 app.use(cors(corsOptions));
-
 // parse requests of content-type - application/json
 app.use(express.json());
-
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
+const db = require("./models");
 const Role = db.role;
 db.mongoose
-    .connect('mongodb+srv://soc-bootcamper:bootcamp@cluster0.cws7p.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+    .connect('mongodb+srv://soc-bootcamper:bootcamp@cluster0.cws7p.mongodb.net/aztechUsers?retryWrites=true&w=majority',
     {
         useNewUrlParser:true,
         useUnifiedTopology:true
@@ -56,10 +53,13 @@ function initial () {
       });
 }
 
-// simple route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to The World of Aztech.  Be afraid.  Be very very afraid indeed." });
-});
+//routes
+require('./routes/auth.routes')(app);
+require('./routes/user.routes')(app);
+// // simple route
+// app.get("/", (req, res) => {
+//   res.json({ message: "Welcome to The World of Aztech.  Be afraid.  Be very very afraid indeed." });
+// });
 
 // set port, listen for requests
 const PORT = process.env.PORT || 3000;

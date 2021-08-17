@@ -3,13 +3,13 @@ const db = require("../models");
 const User = db.user;
 const Role = db.role;
 
-var jwt = require("jsonwebtoken");
-var bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 
 exports.signup = (req, res) => {
   const user = new User({
-    username: req.body.username,
-    email: req.body.email,
+    userName: req.body.userName, //userName == email
+    displayName: req.body.displayName,
     password: bcrypt.hashSync(req.body.password, 8)
   });
 
@@ -37,7 +37,7 @@ exports.signup = (req, res) => {
               return;
             }
 
-            res.send({ message: "User was registered successfully!" });
+            res.send({ message: "Admin was registered successfully!" });
           });
         }
       );
@@ -64,7 +64,7 @@ exports.signup = (req, res) => {
 
 exports.signin = (req, res) => {
   User.findOne({
-    username: req.body.username
+    userName: req.body.userName
   })
     .populate("roles", "-__v")
     .exec((err, user) => {
@@ -77,7 +77,7 @@ exports.signin = (req, res) => {
         return res.status(404).send({ message: "User Not found." });
       }
 
-      var passwordIsValid = bcrypt.compareSync(
+      const passwordIsValid = bcrypt.compareSync(
         req.body.password,
         user.password
       );
@@ -100,8 +100,8 @@ exports.signin = (req, res) => {
       }
       res.status(200).send({
         id: user._id,
-        username: user.username,
-        email: user.email,
+        userName: user.userName,
+        displayName: user.displayName,
         roles: authorities,
         accessToken: token
       });
