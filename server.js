@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const Role = db.role;
 db.mongoose
-    .connect('mongodb+srv://soc-bootcamper:bootcamp@cluster0.cws7p.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',{
+    .connect('',{
         useNewURLParser:true,
         useUnifiedTopology:true
     })
