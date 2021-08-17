@@ -12,15 +12,16 @@ var corsOptions = {
 app.use(cors(corsOptions));
 
 // parse requests of content-type - application/json
-app.use(bodyParser.json());
+app.use(express.json());
 
 // parse requests of content-type - application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 
 const Role = db.role;
 db.mongoose
-    .connect('mongodb+srv://soc-bootcamper:bootcamp@cluster0.cws7p.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',{
-        useNewURLParser:true,
+    .connect('mongodb+srv://soc-bootcamper:bootcamp@cluster0.cws7p.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+    {
+        useNewUrlParser:true,
         useUnifiedTopology:true
     })
     .then(() => {
