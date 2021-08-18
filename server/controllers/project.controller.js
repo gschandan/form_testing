@@ -1,0 +1,45 @@
+const config = require("../config/auth.config");
+const db = require("../models");
+const User = db.user;
+const Role = db.role;
+const Project = db.project;
+
+const jwt = require("jsonwebtoken");
+
+exports.projectSubmit = (req, res) => {
+    const project = new Project ({
+      projectName: req.body.projectName,
+      weekNumber: req.body.weekNumber,
+      contributors: req.body.contributors, //need to handle array on front end to pass through having been validated
+      problemStatement: req.body.problemStatement,
+      additionalInformation: req.body.additionalInformation,
+      githubUrl: req.body.githubUrl,
+      techUsed: req.body.techUsed,
+      appDeploymentData: req.body.appDeploymentData,
+      additionalData: req.body.additionalData
+    })
+
+  project.save((err, project) => {
+      if (err) {
+        res.status(500).send({ message: err });
+        return;
+      }
+
+      Project.find({ githubUrl: {$in: project.githubUrl}}).exec((err, project) => {
+        if (err) {
+          res.status(500).send({ message: err });
+          return;
+        }
+        if(project) {
+            res.status(400).send({ message: "Project already exists in the database!"});
+            return;
+        }
+        else {
+        res.send({message: "Project successfully added!"})
+         }   })
+    }
+    )  
+};
+
+
+module.exports = projectSubmit;

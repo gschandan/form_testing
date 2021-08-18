@@ -23,7 +23,8 @@ const project = new mongoose.Schema ({
     },
     githubUrl: {
         type:String,
-        required: true
+        required: true,
+        unique: true
     },
     techUsed: [{
         type:String,
