@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 const db = require("./models");
 const Role = db.role;
 db.mongoose
-    .connect('mongodb+srv://soc-bootcamper:bootcamp@cluster0.cws7p.mongodb.net/aztechUsers?retryWrites=true&w=majority',
+    .connect('',
     {
         useNewUrlParser:true,
         useUnifiedTopology:true
