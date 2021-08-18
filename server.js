@@ -2,11 +2,12 @@ const express = require("express");
 const cors = require("cors");
 const db = require("./models");
 const dotenv = require("dotenv");
+dotenv.config();
 
 const app = express();
 
 var corsOptions = {
-  origin: "http://localhost:3001"
+    origin: "*"
 };
 
 app.use(cors(corsOptions));
@@ -19,8 +20,8 @@ app.use(express.urlencoded({ extended: true }));
 
 const Role = db.role;
 db.mongoose
-    .connect(`mongodb+srv://${process.env.DBUSER}:${process.env.DBPASSWORD}@cluster0.cws7p.mongodb.net/testdb?retryWrites=true&w=majority`,{
-        useNewURLParser:true,
+    .connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.cws7p.mongodb.net/aztechUsers?retryWrites=true&w=majority`,{
+        useNewUrlParser:true,
         useUnifiedTopology:true
     })
     .then(() => {
