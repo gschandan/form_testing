@@ -58,6 +58,7 @@ function initial () {
 //routes
 require('./routes/auth.routes')(app);
 require('./routes/user.routes')(app);
+require('./routes/project.routes')(app);
 // // simple route
 // app.get("/", (req, res) => {
 //   res.json({ message: "Welcome to The World of Aztech.  Be afraid.  Be very very afraid indeed." });
