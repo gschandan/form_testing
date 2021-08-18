@@ -3,7 +3,6 @@ const cors = require("cors");
 const db = require("./models");
 const dotenv = require("dotenv");
 
-
 const app = express();
 
 var corsOptions = {
@@ -57,12 +56,16 @@ function initial () {
 }
 
 // simple route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to The World of Aztech.  Be afraid.  Be very very afraid indeed." });
-});
+// app.get("/", (req, res) => {
+//   res.json({ message: "Welcome to The World of Aztech.  Be afraid.  Be very very afraid indeed." });
+// });
 
 // set port, listen for requests
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
+
+// routes
+require('./routes/auth.routes')(app);
+require('./routes/user.routes')(app);
