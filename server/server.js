@@ -1,6 +1,9 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const dotenv = require("dotenv")
+
+dotenv.config()
 
 const corsOptions = {
   origin: "http://localhost:3001"
@@ -16,7 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 const db = require("./models");
 const Role = db.role;
 db.mongoose
-    .connect('',
+    .connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.cws7p.mongodb.net/aztechUsers?retryWrites=true&w=majority`,
     {
         useNewUrlParser:true,
         useUnifiedTopology:true
