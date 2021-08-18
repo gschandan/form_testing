@@ -21,25 +21,26 @@ exports.projectSubmit = (req, res) => {
 
   project.save((err, project) => {
       if (err) {
-        res.status(500).send({ message: err });
+        res.status(500).send({ message: err,
+                                error: "Project with that GitHub URL already exists" });
         return;
       }
-
-      Project.find({ githubUrl: {$in: project.githubUrl}}).exec((err, project) => {
-        if (err) {
-          res.status(500).send({ message: err });
-          return;
-        }
-        if(project) {
-            res.status(400).send({ message: "Project already exists in the database!"});
-            return;
-        }
-        else {
-        res.send({message: "Project successfully added!"})
-         }   })
+     res.status(200).send({ message: "Project successfully added!"});
+     return;
+    //   Project.find({ githubUrl: {$in: project.githubUrl}}).exec((err, project) => {
+    //     if (err) {
+    //       res.status(500).send({ message: err });
+    //       return;
+    //     }
+    //     res.send(project);
+    //     // if(project) {
+    //     //     res.status(400).send({ message: "Project successfully added!"});
+    //     //     return;
+    //     // }
+    //     // else {
+    //     // res.send({message: "Project already exists in the database! "})
+    //     //  }   
+    //     })
     }
     )  
 };
-
-
-module.exports = projectSubmit;

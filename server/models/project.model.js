@@ -10,8 +10,10 @@ const project = new mongoose.Schema ({
         required:true
     },
     contributors: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
+        // type: mongoose.Schema.Types.ObjectId,
+        // ref: "User"
+        type:String,
+        required:true
     }],
     problemStatement: {
         type:String,
@@ -54,3 +56,27 @@ const project = new mongoose.Schema ({
 const Project = mongoose.model("Project", project);
 
 module.exports = Project;
+
+// {
+//     "projectName": "project1",
+//  "weekNumber": 1,
+//  "contributors": ["a", "b"],
+//  "problemStatement": "life is hard" ,
+//  "additionalInformation": "and it just gets harder" ,
+//  "githubUrl": "changeyourlife.com",
+//  "techUsed": ["mindfulness" , "alcohol"],
+//  "appDeploymentData": {
+//                                        "appImage": "random string",
+//                                        "appUrl": "another random string" 		
+//            } ,
+//  "additionalData": [{
+//                                        "appImage": "random string1",
+//                                        "appUrl": "another random string1" 		
+//            } ,{
+//                                        "appImage": "random string2",
+//                                        "appUrl": "another random string2" 		
+//            } ,{
+//                                        "appImage": "random string3",
+//                                        "appUrl": "another random string3" 		
+//            } ]
+// }
