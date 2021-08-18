@@ -1,7 +1,8 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 const cors = require("cors");
 const db = require("./models");
+const dotenv = require("dotenv");
+
 
 const app = express();
 
@@ -12,14 +13,14 @@ var corsOptions = {
 app.use(cors(corsOptions));
 
 // parse requests of content-type - application/json
-app.use(bodyParser.json());
+app.use(express.json());
 
 // parse requests of content-type - application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 
 const Role = db.role;
 db.mongoose
-    .connect('mongodb+srv://soc-bootcamper:bootcamp@cluster0.cws7p.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',{
+    .connect(`mongodb+srv://${process.env.DBUSER}:${process.env.DBPASSWORD}@cluster0.cws7p.mongodb.net/testdb?retryWrites=true&w=majority`,{
         useNewURLParser:true,
         useUnifiedTopology:true
     })
