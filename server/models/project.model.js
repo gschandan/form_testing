@@ -32,16 +32,15 @@ const project = new mongoose.Schema ({
         type:String,
         required:true
     }],
-    appDeploymentData: {
-        appImage:{
-            type:String,
-            required:true},
-        appUrl: {
-            type:String,
-            required:true
-        }
+    appDeploymentImage: {
+         type:String,
+         required:true
     },
-    additionalData: [{
+    appDeploymentUrl: {
+        type:String,
+        required:true
+    },
+    additionalAppData: [{
         additionalUrls: {
             type:String,
             required:false
@@ -65,11 +64,15 @@ module.exports = Project;
 //  "additionalInformation": "and it just gets harder" ,
 //  "githubUrl": "changeyourlife.com",
 //  "techUsed": ["mindfulness" , "alcohol"],
-//  "appDeploymentData": {
-//                                        "appImage": "random string",
-//                                        "appUrl": "another random string" 		
-//            } ,
-// "additionalData": [{
+//   "appDeploymentImage": {
+//     type:String,
+//     required:true
+// },
+// appDeploymentUrl: {
+//    type:String,
+//    required:true
+// },
+// "additionalAppData": [{
 //     "additionalImages": "random string1",
 //     "additionalUrls": "another random string1" 		
 // } ,{
