@@ -11,7 +11,7 @@ import {isRequiredInput} from "../lib/isRequiredInput"
 
 import {submit} from "../services/user.submit";
 
-const SubmitProject = (props) => {
+export const SubmitProject = (props) => {
 
     const form = useRef();
     const submitButton = useRef();
@@ -179,8 +179,20 @@ const SubmitProject = (props) => {
                             // onChange={(e)=> setAdditionalAppData(e.target.value)} // need a function
                             validations={[isRequiredInput]}
                         />
-                    </div>          
-                </div>)}
+                    </div>
+                             
+                    <div>
+                        <button >Add Project</button>
+                    </div>
+                </div>
+            )}
+
+                    {message && (
+                    <div>
+                            {message}
+                    </div>
+                )}
+                <CheckButton style={{ display: "none" }} ref={submitButton} />
             </Form>
         </div>
     )
