@@ -10,6 +10,7 @@ import Home from "./components/Home";
 import Profile from "./components/Profile";
 import UserPage from "./components/UserPage";
 import AdminPage from "./components/AdminPage";
+import {SubmitProject} from "./components/ProjectSubmit"
 
 const App = () => {
   const [showAdminPage, setShowAdminPage] = useState(false);
@@ -65,6 +66,11 @@ const App = () => {
                 {currentUser.userName}
               </Link>
             </li>
+            <li>
+            <Link to= {"/submit"} className="nav-link">
+                Submit a new project
+            </Link>                 
+            </li>
             <li className="nav-item">
               <a href="/login" className="nav-link" onClick={logOut}>
                 LogOut
@@ -96,6 +102,7 @@ const App = () => {
           <Route exact path="/profile" component={Profile} />
           <Route path="/user" component={UserPage} />
           <Route path="/admin" component={AdminPage} />
+          <Route path="/submit" component={SubmitProject} />
         </Switch>
       </div>
     </div>
