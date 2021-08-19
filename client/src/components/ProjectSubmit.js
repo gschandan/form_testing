@@ -8,6 +8,7 @@ import {isValidInput } from "../lib/isValidInput"
 import {isRequiredInput} from "../lib/isRequiredInput"
 
 
+
 import {submit} from "../services/user.submit";
 
 export const SubmitProject = (props) => {
@@ -18,6 +19,7 @@ export const SubmitProject = (props) => {
     const [projectName, setProjectName] = useState("Enter Project Name");
     const [weekNumber,setWeekNumber] = useState (0);
     const [contributors, setContributors] = useState ([]);
+    const [contributor, setContributor] = useState("")
     const [problemStatement, setProblemStatement] = useState ("Enter the project objective");
     const [additionalInformation, setAdditionalInformation] = useState ("Enter additional information about your project");
     const [githubUrl, setGithubUrl] = useState ("Enter GitHub Repo link");
@@ -33,10 +35,16 @@ export const SubmitProject = (props) => {
     const [successful, setSuccessful] = useState(false);
     const [message, setMessage] = useState("");
 
-    const handleAddContributor = (e) => {
-        const contributorData = e.target.value;
-        const contributorArray = contributorData.split(",");
-        setContributors(contributorArray)
+    const addContributorEmail = (e) => {
+     e.preventDefault();
+     if (isEmail(contributor)) {
+         setContributors([...contributors, contributor])
+     }
+     else setContributor("invalid email address")
+    }
+    const removeContributorEmail = (e) => {
+        e.preventDefault();
+        setContributors([contributors.slice()])
     }
 
     const handleSubmit = (e) => {
@@ -103,16 +111,28 @@ export const SubmitProject = (props) => {
                             validations={[isRequiredInput]}
                         />
                     </div>
+                    {/* <ContributorInput contributorArray={contributorArray} setContributorArray={setContributorArray}></ContributorInput> */}
                     <div className="">
                         <label htmlFor="contributors">contributors</label>
                         <Input
                             type="text"
-                            name="contributors"
+                            name="contributor"
                             placeholder="Add email addresses of all contributors, separated with a comma"
-                            value={contributors}
-                            onBlur={handleAddContributor}
-                            validations={[isRequiredInput]}
-                        />
+                             value={contributor}
+                             onChange={(e) => setContributor(e.target.value)}
+                            //  validations={[isRequiredInput]}
+                            />
+                        <button onClick={(e)=>addContributorEmail(e)}>+</button>
+                        <ul>
+                            {contributors.map ((item,i) => {
+                                return (
+                                <li key={i}>Contributor {i+1}: {item}
+                                    <button onClick={(e)=>removeContributorEmail(e)}>-</button>
+                                </li>
+                                )
+                            })}
+    
+                        </ul>
                     </div>
                     <div className="">
                         <label htmlFor="problemStatement">problemStatement</label>
