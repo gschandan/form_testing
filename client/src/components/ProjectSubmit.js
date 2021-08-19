@@ -42,9 +42,18 @@ export const SubmitProject = (props) => {
      }
      else setContributor("invalid email address")
     }
-    const removeContributorEmail = (e) => {
+    
+    //TO FIX
+    const removeContributorEmail = (e, i) => {
         e.preventDefault();
-        setContributors([contributors.slice()])
+        if(i===0 && contributors.length >1) {
+        setContributors([contributors.slice(i+1)])}
+        else if(i===0 && contributors.length === 1) {
+            setContributors([])
+            }
+        else {
+            setContributors([contributors.slice(0,i), contributors.slice(i+1)])
+        }
     }
 
     const handleSubmit = (e) => {
@@ -127,7 +136,7 @@ export const SubmitProject = (props) => {
                             {contributors.map ((item,i) => {
                                 return (
                                 <li key={i}>Contributor {i+1}: {item}
-                                    <button onClick={(e)=>removeContributorEmail(e)}>-</button>
+                                    <button onClick={(e, i)=>removeContributorEmail(e, i)}>-</button>
                                 </li>
                                 )
                             })}
