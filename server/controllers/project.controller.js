@@ -15,9 +15,11 @@ exports.projectSubmit = (req, res) => {
       additionalInformation: req.body.additionalInformation,
       githubUrl: req.body.githubUrl,
       techUsed: req.body.techUsed,
-      appDeploymentData: req.body.appDeploymentData,
-      additionalData: req.body.additionalData
-    })
+      appDeploymentImage: req.body.appDeploymentImage,
+      appDeploymentUrl: req.body.appDeploymentUrl,
+      additionalAppData: req.body.additionalAppData
+    }
+    )
 
   project.save((err, project) => {
       if (err) {

@@ -1,7 +1,6 @@
 import React, { useState, useRef } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
-import Checkbox from "react-validation/build/checkbox";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
 import { isValidUrl } from "../lib/urlValidator";
@@ -26,8 +25,10 @@ export const SubmitProject = (props) => {
     const [appDeploymentImage, setAppDeploymentImage] = useState("");
     const [appDeploymentUrl, setAppDeploymentUrl] = useState("");
     const [additionalAppData, setAdditionalAppData] = useState([
-        {additionalUrls: "url1", additionalImages: "image1"},
-        {additionalUrls: "url2", additionalImages: "image2"}]);
+        {additionalUrls: "url1", additionalImages: "image1"}
+        ,
+        {additionalUrls: "url2", additionalImages: "image2"}
+    ]);
 
     const [successful, setSuccessful] = useState(false);
     const [message, setMessage] = useState("");
@@ -45,7 +46,7 @@ export const SubmitProject = (props) => {
 
         form.current.validateAll();
 
-        if (submitButton.current.context._errors.length === 0) {
+        // if (submitButton.current.context._errors.length === 0) {
             submit(projectName,
                 weekNumber,
                 contributors,
@@ -53,26 +54,29 @@ export const SubmitProject = (props) => {
                 additionalInformation,
                 githubUrl,
                 techUsed,
-                appDeploymentData,
+                appDeploymentImage,
+                appDeploymentUrl,
                 additionalAppData)
                 .then(                    
                 (response) => {
                     setMessage(response.data.message);
+                    console.log(response);
                     setSuccessful(true);
                 },
                 (error) => {
-                    const resMessage =
-                    (error.response &&
-                      error.response.data &&
-                      error.response.data.message) ||
-                    error.message ||
-                    error.toString();
+                    const resMessage = error.response
+                    // (error.response &&
+                    //   error.response.data &&
+                    //   error.response.data.message) ||
+                    // error.message ||
+                    // error.toString();
         
-                  setMessage(resMessage);
+                //   setMessage(resMessage);
+                  console.log(resMessage)
                   setSuccessful(false);
                 }
                 )
-        }
+        // }
     }
     return (
         <div >
@@ -125,7 +129,7 @@ export const SubmitProject = (props) => {
                         <Input
                             type="text"
                             name="additionalInformation"
-                            value={projectName}
+                            value={additionalInformation}
                             onChange={(e)=> setAdditionalInformation(e.target.value)}
                             validations={[isRequiredInput]}
                         />
@@ -145,7 +149,7 @@ export const SubmitProject = (props) => {
                         <Input // need a separate component that maps through tech array and creates checkbox for each
                             type="checkbox"
                             name="techUsed"
-                            value={techUsed}
+                            // value={techUsed}
                             // onChange={}
                             // validations={[isRequiredInput]}
                         />
@@ -175,24 +179,24 @@ export const SubmitProject = (props) => {
                         <Input
                             type="text"
                             name="additionalAppData"
-                            value={additionalAppData}
+                            // value={additionalAppData}
                             // onChange={(e)=> setAdditionalAppData(e.target.value)} // need a function
-                            validations={[isRequiredInput]}
+                            // validations={[isRequiredInput]}
                         />
                     </div>
-                             
+{/*                              
                     <div>
-                        <button >Add Project</button>
-                    </div>
+                        <button onClick={} >Add Project</button>
+                    </div> */}
                 </div>
             )}
-
+{/* 
                     {message && (
                     <div>
                             {message}
                     </div>
-                )}
-                <CheckButton style={{ display: "none" }} ref={submitButton} />
+                )} */}
+                <button onClick={handleSubmit} ref={submitButton}>Add your project</button>
             </Form>
         </div>
     )

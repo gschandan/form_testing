@@ -13,6 +13,7 @@ export const submit = (
     appDeploymentImage,
     appDeploymentUrl,
     additionalAppData) => {
+        console.log ("I am here!!!")
   return axios.post(API_URL, {
     projectName,
     weekNumber,

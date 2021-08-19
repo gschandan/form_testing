@@ -57,29 +57,23 @@ const Project = mongoose.model("Project", project);
 module.exports = Project;
 
 // {
-//     "projectName": "project1",
+//     "projectName": "project test",
 //  "weekNumber": 1,
 //  "contributors": ["a", "b"],
 //  "problemStatement": "life is hard" ,
 //  "additionalInformation": "and it just gets harder" ,
-//  "githubUrl": "changeyourlife.com",
+//  "githubUrl": "changeyourlife10.com",
 //  "techUsed": ["mindfulness" , "alcohol"],
-//   "appDeploymentImage": {
-//     type:String,
-//     required:true
-// },
-// appDeploymentUrl: {
-//    type:String,
-//    required:true
-// },
-// "additionalAppData": [{
-//     "additionalImages": "random string1",
-//     "additionalUrls": "another random string1" 		
-// } ,{
-//     "additionalImages": "random string2",
-//     "additionalUrls": "another random string2" 		
-// } ,{
-//     "additionalImages": "random string3",
-//     "additionalUrls": "another random string3" 		
-// } ]
+//  "appDeploymentImage": "random string",
+//        "appDeploymentUrl": "another random string",
+//  "additionalProjectData": [{
+//                                        "additionalImages": "random string1",
+//                                        "additionalUrls": "another random string1" 		
+//            } ,{
+//                                        "additionalImages": "random string2",
+//                                        "additionalUrls": "another random string2" 		
+//            } ,{
+//                                        "additionalImages": "random string3",
+//                                        "additionalUrls": "another random string3" 		
+//            } ]
 // }

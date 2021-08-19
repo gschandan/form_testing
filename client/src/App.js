@@ -102,6 +102,7 @@ const App = () => {
           <Route exact path="/profile" component={Profile} />
           <Route path="/user" component={UserPage} />
           <Route path="/admin" component={AdminPage} />
+          <Route path="/submit" component={SubmitProject} />
         </Switch>
       </div>
     </div>
