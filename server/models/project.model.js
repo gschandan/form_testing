@@ -69,14 +69,14 @@ module.exports = Project;
 //                                        "appImage": "random string",
 //                                        "appUrl": "another random string" 		
 //            } ,
-//  "additionalData": [{
-//                                        "appImage": "random string1",
-//                                        "appUrl": "another random string1" 		
-//            } ,{
-//                                        "appImage": "random string2",
-//                                        "appUrl": "another random string2" 		
-//            } ,{
-//                                        "appImage": "random string3",
-//                                        "appUrl": "another random string3" 		
-//            } ]
+// "additionalData": [{
+//     "additionalImages": "random string1",
+//     "additionalUrls": "another random string1" 		
+// } ,{
+//     "additionalImages": "random string2",
+//     "additionalUrls": "another random string2" 		
+// } ,{
+//     "additionalImages": "random string3",
+//     "additionalUrls": "another random string3" 		
+// } ]
 // }
