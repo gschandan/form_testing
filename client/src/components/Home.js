@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import Splash from "../assets/splash.png"
 import UserService from "../services/user.service";
 
 const Home = () => {
@@ -23,9 +23,16 @@ const Home = () => {
 
   return (
     <div className="container">
-      <header className="jumbotron">
-        <h3>{content}</h3>
-      </header>
+      <img 
+        src={Splash} 
+        alt="logo"
+        style={{
+          width: "100vw",
+          position: "absolute",
+          top: 0,
+          zIndex: -1
+        }}
+      />
     </div>
   );
 };

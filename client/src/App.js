@@ -30,63 +30,66 @@ const App = () => {
 
   return (
     <div>
-      <nav className="navbar navbar-expand navbar-dark bg-dark">
-        <Link to={"/"} className="navbar-brand">
+      <nav style={{
+        marginTop: "1em",
+        display: "flex",
+        justifyContent:"space-evenly",
+        listStyleType: "none",
+        overflow:"hidden"
+      }}>
+        <Link to={"/"}>
           AztechCorp
         </Link>
-        <div className="navbar-nav mr-auto">
-          <li className="nav-item">
-            <Link to={"/home"} className="nav-link">
+          <li>
+            <Link to={"/home"} >
               Home
             </Link>
           </li>
 
           {showAdminPage && (
-            <li className="nav-item">
-              <Link to={"/admin"} className="nav-link">
+            <li>
+              <Link to={"/admin"}>
                 Admin Board
               </Link>
             </li>
           )}
 
-        </div>
-
         {currentUser ? (
-          <div className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <Link to={"/edit-profile"} className="nav-link">
+          <>
+            <li>
+              <Link to={"/edit-profile"}>
                 My Profile
               </Link>
             </li>
             <li>
-            <Link to= {"/submit"} className="nav-link">
+            <Link to= {"/submit"}>
                 Submit a new project
             </Link>                 
             </li>
-            <li className="nav-item">
-              <a href="/" className="nav-link" onClick={logOut}>
+            <li>
+              <a href="/" onClick={logOut}>
                 LogOut
               </a>
             </li>
-          </div>
+            </>
         ) : (
-          <div className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <Link to={"/login"} className="nav-link">
+          <>
+            <li>
+              <Link to={"/login"}>
                 Login
               </Link>
             </li>
 
-            <li className="nav-item">
-              <Link to={"/register"} className="nav-link">
+            <li>
+              <Link to={"/register"}>
                 Sign Up
               </Link>
             </li>
-          </div>
+          </>
         )}
       </nav>
 
-      <div className="container mt-3">
+      <div>
         <Switch>
           <Route exact path={["/", "/home"]} component={Home} />
           <Route path="/login" component={Login} />
