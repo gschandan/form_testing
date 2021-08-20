@@ -24,8 +24,10 @@ const App = () => {
     }
   }, []);
 
-  const logOut = () => {
+  const logOut = (props) => {
     AuthService.logout();
+    props.history.push("/");
+    window.location.reload();
   };
 
   return (
