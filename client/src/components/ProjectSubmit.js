@@ -42,19 +42,24 @@ export const SubmitProject = (props) => {
      }
      else setContributor("invalid email address")
     }
-    
+
     //TO FIX
-    const removeContributorEmail = (e, i) => {
-        e.preventDefault();
-        if(i===0 && contributors.length >1) {
-        setContributors([contributors.slice(i+1)])}
-        else if(i===0 && contributors.length === 1) {
-            setContributors([])
-            }
-        else {
-            setContributors([contributors.slice(0,i), contributors.slice(i+1)])
-        }
-    }
+    const removeContributorEmail = (i) => {
+        // e.preventDefault();
+        // if(i===0) {
+        setContributors(contributors.slice(1))
+    // }
+        // setContributors([...contributors.slice(0,i), ...contributors.slice(i+1)])
+        // setContributors([...contributors, "fake@gmail.com"]);
+       alert("bollocks button", i);
+       }
+        // else if(i===0 && contributors.length === 1) {
+            // setContributors([])
+            // }
+        // else {
+            // setContributors([contributors.slice(0,i), contributors.slice(i+1)])
+        // }
+    // }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -135,8 +140,8 @@ export const SubmitProject = (props) => {
                         <ul>
                             {contributors.map ((item,i) => {
                                 return (
-                                <li key={i}>Contributor {i+1}: {item}
-                                    <button onClick={(e, i)=>removeContributorEmail(e, i)}>-</button>
+                                <li key={i} className={i}>Contributor {i+1}: {item}
+                                    <button onClick={(i)=>removeContributorEmail(i)}>-{i}</button>
                                 </li>
                                 )
                             })}
