@@ -24,10 +24,8 @@ const App = () => {
     }
   }, []);
 
-  const logOut = (props) => {
+  const logOut = () => {
     AuthService.logout();
-    props.history.push("/");
-    window.location.reload();
   };
 
   return (
@@ -66,7 +64,7 @@ const App = () => {
             </Link>                 
             </li>
             <li className="nav-item">
-              <a href="/login" className="nav-link" onClick={logOut}>
+              <a href="/" className="nav-link" onClick={logOut}>
                 LogOut
               </a>
             </li>
