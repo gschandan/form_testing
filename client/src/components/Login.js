@@ -45,7 +45,7 @@ const Login = (props) => {
     if (checkBtn.current.context._errors.length === 0) {
       AuthService.login(userName, password).then(
         () => {
-          props.history.push("/profile");
+          props.history.push("/edit-profile");
           window.location.reload();
         },
         (error) => {

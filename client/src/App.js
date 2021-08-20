@@ -7,8 +7,7 @@ import AuthService from "./services/auth.service";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Home from "./components/Home";
-import Profile from "./components/Profile";
-import UserPage from "./components/UserPage";
+import EditProfile from "./components/EditProfile";
 import AdminPage from "./components/AdminPage";
 import {SubmitProject} from "./components/ProjectSubmit"
 
@@ -50,20 +49,13 @@ const App = () => {
             </li>
           )}
 
-          {currentUser && (
-            <li className="nav-item">
-              <Link to={"/user"} className="nav-link">
-                User
-              </Link>
-            </li>
-          )}
         </div>
 
         {currentUser ? (
           <div className="navbar-nav ml-auto">
             <li className="nav-item">
-              <Link to={"/profile"} className="nav-link">
-                {currentUser.userName}
+              <Link to={"/edit-profile"} className="nav-link">
+                My Profile
               </Link>
             </li>
             <li>
@@ -99,8 +91,7 @@ const App = () => {
           <Route exact path={["/", "/home"]} component={Home} />
           <Route path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
-          <Route path="/profile" component={Profile} />
-          <Route path="/user" component={UserPage} />
+          <Route path="/edit-profile" component={EditProfile} />
           <Route path="/admin" component={AdminPage} />
           <Route path="/submit" component={SubmitProject} />
         </Switch>

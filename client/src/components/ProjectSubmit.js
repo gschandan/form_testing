@@ -36,7 +36,7 @@ export const SubmitProject = () => {
     const addContributorEmail = (e) => {
         e.preventDefault();
         if (isEmail(contributor)) {
-        setContributors([...contributors, contributor])
+        setContributors([...contributors, contributor.toLowerCase()])
         }
         else setContributor("invalid email address")
     }
@@ -213,7 +213,7 @@ export const SubmitProject = () => {
             )}
           {message && (
             <div>
-                {successful ? "Success" : "Failed"}
+                {successful ? "Success " : "Failed! "}
                 {message}
             </div>
           )}
