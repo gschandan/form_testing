@@ -6,6 +6,7 @@ import { isEmail } from "validator";
 import { isValidUrl } from "../lib/urlValidator";
 import {isValidInput } from "../lib/isValidInput"
 import {isRequiredInput} from "../lib/isRequiredInput"
+import TokenService from "../services/token.service";
 
 import {submit} from "../services/user.submit";
 
@@ -52,12 +53,14 @@ export const SubmitProject = () => {
 
         setMessage("");
         setSuccessful(false);
-        const user = JSON.parse(localStorage.getItem('user'));
-        if (!(user && user.accessToken)) {
-            setMessage("Error: Please login first!");
+
+        const isAuthenticated = TokenService.getUser()
+        if (!isAuthenticated){
+            setMessage("You must login first!");
             setSuccessful(false);
             return;
         }
+
         form.current.validateAll();
 
         if (submitButton.current.context._errors.length === 0) {

@@ -1,19 +1,15 @@
-import axios from "axios";
-import authHeader from "./auth-header";
-import { API_URL } from "../config";
-
-const USER_URL = API_URL + "test/";
+import instance from "./api.interceptor"
 
 const getPublicContent = () => {
-  return axios.get(USER_URL + "all");
+  return instance.get("test/all");
 };
 
 const getUserPage = () => {
-  return axios.get(USER_URL + "user", { headers: authHeader() });
+  return instance.get("test/user");
 };
 
 const getAdminPage = () => {
-  return axios.get(USER_URL + "admin", { headers: authHeader() });
+  return instance.get("test/admin");
 };
 
 const UserService =  {

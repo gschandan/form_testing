@@ -1,7 +1,4 @@
-import axios from "axios";
-import { API_URL } from "../config";
-
-const PROJECT_SUBMIT_URL = API_URL + "project/submit/";
+import instance from "./api.interceptor"
 
 export const submit = (
     projectName,
@@ -14,7 +11,7 @@ export const submit = (
     appDeploymentImage,
     appDeploymentUrl,
     additionalAppData) => {
-  return axios.post(PROJECT_SUBMIT_URL, {
+  return instance.post("project/submit/", {
     projectName,
     weekNumber,
     contributors,
