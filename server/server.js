@@ -54,10 +54,15 @@ function initial () {
 }
 
 //routes
-require('./routes/auth.routes')(app);
-require('./routes/user.routes')(app);
-require('./routes/project.routes')(app);
+const AuthRoute = require('./routes/auth.routes');
+const UserRoute = require('./routes/user.routes');
+const ProjectRoute = require('./routes/project.routes');
 
+app
+  .use('/api/auth', AuthRoute)
+  .use('/api/test', UserRoute)
+  .use('/api/project', ProjectRoute)
+  
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);

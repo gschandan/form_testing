@@ -97,9 +97,9 @@ const App = () => {
       <div className="container mt-3">
         <Switch>
           <Route exact path={["/", "/home"]} component={Home} />
-          <Route exact path="/login" component={Login} />
+          <Route path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
-          <Route exact path="/profile" component={Profile} />
+          <Route path="/profile" component={Profile} />
           <Route path="/user" component={UserPage} />
           <Route path="/admin" component={AdminPage} />
           <Route path="/submit" component={SubmitProject} />
