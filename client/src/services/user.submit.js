@@ -1,6 +1,7 @@
 import axios from "axios";
+import { API_URL } from "../config";
 
-const API_URL = "http://localhost:3000/api/project/submit/";
+const PROJECT_SUBMIT_URL = API_URL + "project/submit/";
 
 export const submit = (
     projectName,
@@ -13,8 +14,7 @@ export const submit = (
     appDeploymentImage,
     appDeploymentUrl,
     additionalAppData) => {
-        console.log ("I am here!!!")
-  return axios.post(API_URL, {
+  return axios.post(PROJECT_SUBMIT_URL, {
     projectName,
     weekNumber,
     contributors,
