@@ -7,11 +7,9 @@ import { isValidUrl } from "../lib/urlValidator";
 import {isValidInput } from "../lib/isValidInput"
 import {isRequiredInput} from "../lib/isRequiredInput"
 
-
-
 import {submit} from "../services/user.submit";
 
-export const SubmitProject = (props) => {
+export const SubmitProject = () => {
 
     const form = useRef();
     const submitButton = useRef();
@@ -36,39 +34,33 @@ export const SubmitProject = (props) => {
     const [message, setMessage] = useState("");
 
     const addContributorEmail = (e) => {
-     e.preventDefault();
-     if (isEmail(contributor)) {
-         setContributors([...contributors, contributor])
-     }
-     else setContributor("invalid email address")
+        e.preventDefault();
+        if (isEmail(contributor)) {
+        setContributors([...contributors, contributor])
+        }
+        else setContributor("invalid email address")
     }
 
-    //TO FIX
-    const removeContributorEmail = (i) => {
-        // e.preventDefault();
-        // if(i===0) {
-        setContributors(contributors.slice(1))
-    // }
-        // setContributors([...contributors.slice(0,i), ...contributors.slice(i+1)])
-        // setContributors([...contributors, "fake@gmail.com"]);
-       alert("bollocks button", i);
-       }
-        // else if(i===0 && contributors.length === 1) {
-            // setContributors([])
-            // }
-        // else {
-            // setContributors([contributors.slice(0,i), contributors.slice(i+1)])
-        // }
-    // }
+    const removeContributorEmail = (e,i) => {
+        e.preventDefault();
+        const newList = contributors.filter((item) => contributors[i] !== item)
+        setContributors(newList)
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
         setMessage("");
         setSuccessful(false);
-
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (!(user && user.accessToken)) {
+            setMessage("Error: Please login first!");
+            setSuccessful(false);
+            return;
+        }
         form.current.validateAll();
 
-        // if (submitButton.current.context._errors.length === 0) {
+        if (submitButton.current.context._errors.length === 0) {
             submit(projectName,
                 weekNumber,
                 contributors,
@@ -86,19 +78,16 @@ export const SubmitProject = (props) => {
                     setSuccessful(true);
                 },
                 (error) => {
-                    const resMessage = error.response
-                    // (error.response &&
-                    //   error.response.data &&
-                    //   error.response.data.message) ||
-                    // error.message ||
-                    // error.toString();
-        
-                //   setMessage(resMessage);
-                  console.log(resMessage)
-                  setSuccessful(false);
-                }
+                    const resMessage = (error.response &&
+                        error.response.data &&
+                        error.response.data.message) ||
+                        error.message ||
+                        error.toString();
+                    setMessage(resMessage);
+                    setSuccessful(false);
+                    }
                 )
-        // }
+        }
     }
     return (
         <div >
@@ -125,7 +114,6 @@ export const SubmitProject = (props) => {
                             validations={[isRequiredInput]}
                         />
                     </div>
-                    {/* <ContributorInput contributorArray={contributorArray} setContributorArray={setContributorArray}></ContributorInput> */}
                     <div className="">
                         <label htmlFor="contributors">contributors</label>
                         <Input
@@ -133,15 +121,15 @@ export const SubmitProject = (props) => {
                             name="contributor"
                             placeholder="Add email addresses of all contributors, separated with a comma"
                              value={contributor}
-                             onChange={(e) => setContributor(e.target.value)}
-                            //  validations={[isRequiredInput]}
+                             onBlur={(e) => setContributor(e.target.value)}
+                             validations={[isRequiredInput]}
                             />
                         <button onClick={(e)=>addContributorEmail(e)}>+</button>
                         <ul>
                             {contributors.map ((item,i) => {
                                 return (
-                                <li key={i} className={i}>Contributor {i+1}: {item}
-                                    <button onClick={(i)=>removeContributorEmail(i)}>-{i}</button>
+                                <li key={i}>Contributor {i+1}: {item}
+                                    <button onClick={(e)=>removeContributorEmail(e,i)}>-{i}</button>
                                 </li>
                                 )
                             })}
@@ -218,21 +206,19 @@ export const SubmitProject = (props) => {
                             // validations={[isRequiredInput]}
                         />
                     </div>
-{/*                              
                     <div>
-                        <button onClick={} >Add Project</button>
-                    </div> */}
+                        <button>Add Project</button>
+                    </div>
                 </div>
             )}
-{/* 
-                    {message && (
-                    <div>
-                            {message}
-                    </div>
-                )} */}
-                <button onClick={handleSubmit} ref={submitButton}>Add your project</button>
+          {message && (
+            <div>
+                {successful ? "Success" : "Failed"}
+                {message}
+            </div>
+          )}
+                <CheckButton style={{ display: "none" }} ref={submitButton} />
             </Form>
         </div>
     )
 }
-
