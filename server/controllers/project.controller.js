@@ -46,3 +46,7 @@ exports.projectSubmit = (req, res) => {
     }
     )  
 };
+
+exports.projectFetch = () {
+  const projectData = result.toJSON();
+}

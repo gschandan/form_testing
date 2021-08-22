@@ -9,6 +9,7 @@ import {isRequiredInput} from "../lib/isRequiredInput"
 import TokenService from "../services/token.service";
 
 import {submit} from "../services/user.submit";
+import {ProjectsList} from "../components/Query";
 
 export const SubmitProject = () => {
 
@@ -209,6 +210,7 @@ export const SubmitProject = () => {
                             // validations={[isRequiredInput]}
                         />
                     </div>
+                    <div><ProjectsList></ProjectsList></div>
                     <div>
                         <button>Add Project</button>
                     </div>
