@@ -1,8 +1,17 @@
 /*
 POST /api/project/submit
+GET /api/project/display
+PUT /api/project/edit
+
+
+get by user
+get by tech
+get by featured
+get by cohort
+get by week
 */
 
-const {projectSubmit} = require("../controllers/project.controller");
+const {projectSubmit, projectDisplay, projectDisplayByTechUsed} = require("../controllers/project.controller");
 
 module.exports = function (app) {
     app.post(
@@ -10,10 +19,17 @@ module.exports = function (app) {
         projectSubmit
         )
     }
-    
-    
-    
-        //  res.header(
-        //     "Access-Control-Allow-Headers",
-        //     "x-access-token, Origin, Content-Type, Accept"
-        //  )
+        
+module.exports = function (app) {
+    app.get (
+        "/api/project/display",
+        projectDisplay
+    )
+}
+
+module.exports = function (app) {
+    app.get (
+        "/api/project/get/:query/:searchText",
+        projectDisplayByTechUsed
+    )
+}

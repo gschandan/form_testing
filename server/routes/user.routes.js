@@ -4,6 +4,7 @@ GET /api/test/all
 GET /api/test/user for loggedin users (user/moderator/admin)
 GET /api/test/mod for moderator
 GET /api/test/admin for admin
+PUT /api/users/edit
 */
 const { authJwt } = require("../middlewares");
 const controller = require("../controllers/user.controller");

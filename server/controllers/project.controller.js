@@ -46,3 +46,24 @@ exports.projectSubmit = (req, res) => {
     }
     )  
 };
+
+exports.projectDisplay = (req, res) => {
+  Project
+    .find({})
+    .then (function (projectsList) {
+      res.send(projectsList)
+    })
+  }
+
+  exports.projectDisplayByTechUsed = (req, res) => {
+    const field = req.params.query;
+    const searchText = req.params.searchText;
+    const searchTextArray = searchText.split(", ");
+    console.log(req.params, "searchText" , searchText, searchTextArray)
+    
+    Project
+    .find({techUsed: {$in: searchTextArray}})
+    .then (function (projectsList) {
+      res.send(projectsList)
+    })
+  }
